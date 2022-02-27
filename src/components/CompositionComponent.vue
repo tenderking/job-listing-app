@@ -2,7 +2,6 @@
   <q-header bordered class="my-header">
     <MyModal
       v-show="isVisible"
-      title="My modal component"
       :selected_prop="selected"
       :close="close"
       :removeSelected="removeSelected"
@@ -145,13 +144,9 @@ export default defineComponent({
   name: 'CompositionComponent',
   components: { MyModal },
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
     rows: {
       type: Array as PropType<Listings[]>,
-     
+
       required: true,
     },
 
@@ -160,13 +155,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let selected = ref<Array<string>> ([]);//array with clicked tags
-
+    let selected = ref<Array<string>>([]); //array with clicked tags
 
     const handleChange = (e: string) => {
       //active to true  switches from full list to filtered list
-      //tags clicked will the added in array excluding duplicates 
-      
+      //tags clicked will the added in array excluding duplicates
+
       active.value = false;
       if (!selected.value.includes(e)) {
         selected.value.push(e);
@@ -182,7 +176,7 @@ export default defineComponent({
     const close = () => {
       //closes modal and empties tags list
       isVisible.value = false;
-      selected.value=[]
+      selected.value = [];
       active.value = false;
     };
     const removeSelected = (e: number) => {
@@ -190,12 +184,12 @@ export default defineComponent({
       if (selected.value.length < 1) {
         close();
       }
-     
+
       return;
     };
 
     let filteredResult = () => {
-       const result3 = props.rows.filter((item) =>
+      const result3 = props.rows.filter((item) =>
         selected.value.some((val) => item.languages.includes(val))
       );
       const result1 = props.rows.filter((item) =>
@@ -208,12 +202,11 @@ export default defineComponent({
         selected.value.some((val) => item.role.includes(val))
       );
       const resultList = [result1, result2, result3, result4];
-      //some arrays will be empty so we remove them here. 
+      //some arrays will be empty so we remove them here.
       let filteredResult = resultList.find((a) => a.length > 1);
-      
+
       return filteredResult;
     };
-    
 
     const getData = computed(() => {
       //we can either get the original data props.rows or the filtered
@@ -226,7 +219,7 @@ export default defineComponent({
     });
     return {
       handleChange,
-      removeSelected,      
+      removeSelected,
       getData,
       selected,
       filteredResult,
