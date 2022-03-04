@@ -11,10 +11,7 @@ This is a solution to the [Job listings with filtering challenge on Frontend Men
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
+- [Installing Dependencies](#Installation)
 
 **Note: Delete this note and update the table of contents based on what sections you keep.**
 
@@ -30,7 +27,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Screenshot](![bilde](https://user-images.githubusercontent.com/10375060/156828701-e821c6fb-a4f1-4b20-a4f4-3b85c37cc140.png))
 
 <!-- Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
 
@@ -42,7 +39,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/tenderking/job-listing-app)
+- Solution URL: [Solution](https://github.com/tenderking/job-listing-app)
 - Live Site URL: [Live site URL](https://tenderking.github.io/job-listing-app/)
 
 ## My process
@@ -84,6 +81,21 @@ let filteredResult = () => {
       return filteredResult;
     };
 }
+```
+The refactored changed the logic and also improved the code to avoid repitition.
+
+```js
+   let filteredResult = () => {
+      const filteredResult = props.rows.filter((item) =>
+        selected.value.every((val) =>
+          [...item.languages, ...item.tools, item.level, item.role].includes(
+            val
+          )
+        )
+      );
+
+      return filteredResult;
+    };
 ```
 
 <!-- ### Useful resources
