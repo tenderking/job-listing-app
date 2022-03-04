@@ -4,10 +4,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'MyModal',
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
+  
     selected_prop: {
       type: Array,
     },

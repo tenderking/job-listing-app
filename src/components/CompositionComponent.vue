@@ -160,9 +160,10 @@ export default defineComponent({
     const handleChange = (e: string) => {
       //active to true  switches from full list to filtered list
       //tags clicked will the added in array excluding duplicates
+      console.log(e);
 
-      active.value = false;
       if (!selected.value.includes(e)) {
+        active.value = false;
         selected.value.push(e);
         active.value = true;
         open();
@@ -189,21 +190,13 @@ export default defineComponent({
     };
 
     let filteredResult = () => {
-      const result3 = props.rows.filter((item) =>
-        selected.value.some((val) => item.languages.includes(val))
+      const filteredResult = props.rows.filter((item) =>
+        selected.value.every((val) =>
+          [...item.languages, ...item.tools, item.level, item.role].includes(
+            val
+          )
+        )
       );
-      const result1 = props.rows.filter((item) =>
-        selected.value.some((val) => item.tools.includes(val))
-      );
-      const result2 = props.rows.filter((item) =>
-        selected.value.some((val) => item.level.includes(val))
-      );
-      const result4 = props.rows.filter((item) =>
-        selected.value.some((val) => item.role.includes(val))
-      );
-      const resultList = [result1, result2, result3, result4];
-      //some arrays will be empty so we remove them here.
-      let filteredResult = resultList.find((a) => a.length > 1);
 
       return filteredResult;
     };
